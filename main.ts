@@ -63,7 +63,7 @@ namespace pid {
         Kd: number,
         max: number,
         min: number): pid_controller {
-        let system = new pid_controller(setpoint, Kp, Ki, Kd, max, min);
-        return system
+        let controller = new pid_controller(setpoint, Kp, Ki, Kd, max, min);
+        return controller
     }
 }
