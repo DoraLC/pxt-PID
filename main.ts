@@ -40,12 +40,12 @@ namespace pid {
         pid_value(pv: number): number{
             this.time_i_1 = this.time_i;
             this.time_i = input.runningTime();
-            this.dt = this.time_i - this.time_i_1;
+            this.dt = (this.time_i - this.time_i_1);
             this.error = pv- this.setpoint;
             let d_error = this.error - this.pre_error;
             this.pid_p = this.Kp*this.error;
-            this.pid_i = this.Ki*(this.error*this.dt/1000);
-            this.pid_d = this.Kd*(d_error*1000/this.dt);
+            this.pid_i = this.Ki*(this.error*(1 + this.dt));
+            this.pid_d = this.Kd*(d_error/this.dt);
             this.pre_error = this.error;
 
             let tmp = this.pid_p + this.pid_i + this.pid_d;
