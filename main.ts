@@ -22,12 +22,12 @@ namespace pid {
         pid_d: number;
 
         constructor(
-        _setpoint: number, 
-        _Kp: number, 
-        _Ki: number, 
-        _Kd: number, 
-        _max: number, 
-        _min: number) {
+            _setpoint: number,
+            _Kp: number,
+            _Ki: number,
+            _Kd: number,
+            _max: number,
+            _min: number) {
             this.setpoint = _setpoint;
             this.Kp = _Kp;
             this.Ki = _Ki;
@@ -37,15 +37,15 @@ namespace pid {
         }
 
         //% block="PID value for %pid|present value %pv"
-        pid_value(pv: number): number{
+        pid_value(pv: number): number {
             this.time_i_1 = this.time_i;
             this.time_i = input.runningTime();
             this.dt = (this.time_i - this.time_i_1);
-            this.error = pv- this.setpoint;
+            this.error = pv - this.setpoint;
             let d_error = this.error - this.pre_error;
-            this.pid_p = this.Kp*this.error;
-            this.pid_i = this.Ki*(this.error*(1 + this.dt));
-            this.pid_d = this.Kd*(d_error/this.dt);
+            this.pid_p = this.Kp * this.error;
+            this.pid_i = this.Ki * (this.error * (1 + this.dt));
+            this.pid_d = this.Kd * (d_error / this.dt);
             this.pre_error = this.error;
 
             let tmp = this.pid_p + this.pid_i + this.pid_d;
@@ -57,11 +57,11 @@ namespace pid {
     //% blockSetVariable=pid
     //% setpoint.defl=0 Kp.defl=0 Ki.defl=0 Kd.defl=0  max.defl=100 min.defl=-100
     export function create(
-        setpoint: number, 
-        Kp: number, 
-        Ki: number, 
-        Kd: number, 
-        max: number, 
+        setpoint: number,
+        Kp: number,
+        Ki: number,
+        Kd: number,
+        max: number,
         min: number): pid_controller {
         let system = new pid_controller(setpoint, Kp, Ki, Kd, max, min);
         return system
