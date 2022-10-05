@@ -53,7 +53,7 @@ namespace pid {
         }
     }
 
-    //% block="PID controller Set|setpoint %setpoint|Kp %Kp|Ki %Ki|Kd %Kd|max %max|min %min"
+    //% block="PID controller|Setpoint %setpoint|Kp %Kp|Ki %Ki|Kd %Kd|max %max|min %min"
     //% blockSetVariable=pid
     //% setpoint.defl=0 Kp.defl=0 Ki.defl=0 Kd.defl=0  max.defl=100 min.defl=-100
     export function create(
