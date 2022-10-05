@@ -9,6 +9,7 @@ namespace pid {
         pre_error: number = 0;
         time_i: number = 0;
         time_i_1: number = 0;
+        integral: number = 0;
         setpoint: number;
         Kp: number;
         Ki: number;
@@ -43,8 +44,9 @@ namespace pid {
             this.dt = (this.time_i - this.time_i_1);
             this.error = pv - this.setpoint;
             let d_error = this.error - this.pre_error;
+            this.integral += this.error * this.dt;
             this.pid_p = this.Kp * this.error;
-            this.pid_i += this.Ki * (this.error * this.dt);
+            this.pid_i = this.Ki * (this.integral);
             this.pid_d = this.Kd * (d_error / this.dt);
             this.pre_error = this.error;
 
